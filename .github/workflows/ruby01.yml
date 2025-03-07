@@ -22,7 +22,7 @@ jobs:
       - name: Set up database
         run: |
           bin/rails db:create
-          bin/rails db:schma:load
+          bin/rails db:schema:load
 
       - name: Run tests
         run: bin/rails test

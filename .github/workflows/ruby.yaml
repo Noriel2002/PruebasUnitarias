@@ -3,20 +3,26 @@ on: [push]
 
 jobs:
   test:
-    - name: Set up Ruby
-      with:
-        ruby-version: 3.4.1
+    runs-on: ubuntu-latest
 
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        bundle install  --jobs 4 --retry 3
-      
-    - name: Set up database
-      run: |
-        bin/rails db:create
-        bin/rails db:schema:load
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Run tests
-      run: |
-        bin/rails test
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.1
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Set up database
+        run: |
+          bin/rails db:create
+          bin/rails db:migrate
+
+      - name: Run tests
+        run: bin/rails test

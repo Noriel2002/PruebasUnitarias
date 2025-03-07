@@ -1,0 +1,10 @@
+<div id="<%= dom_id product %>" class="product-card">
+  <h2><%= product.name %></h2>
+
+  <p><strong>Precio:</strong> $<%= product.price %></p>
+  <p><strong>Descripción:</strong> <%= product.description %></p>
+
+  <p>
+    <%= link_to "Ver Detalles", product, class: "btn btn-primary" %>
+  </p>
+</div>
